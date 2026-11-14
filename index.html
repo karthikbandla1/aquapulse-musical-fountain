@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AquaPulse | Musical Fountain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ambient a1"></div><div class="ambient a2"></div>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brandmark">≈</span><span>AQUA<span class="brand-light">PULSE</span><small>MUSICAL FOUNTAIN CONTROL</small></span></a>
+  <div class="top-right"><span class="live-dot" id="statusDot"></span><span id="connectionText">ESP32 disconnected</span><button class="outline small" id="connectBtn">Connect ESP32</button></div>
+</header>
+<main>
+<section class="hero">
+  <div><div class="eyebrow"><span></span> INTERACTIVE WATER EXPERIENCE</div><h1>Let the music<br><em>move water.</em></h1>
+  <p class="hero-copy">Turn sound into motion. Shape every jet with a live audio-responsive fountain controller.</p>
+  <div class="hero-actions"><label class="primary upload-btn">＋ Load music<input type="file" id="audioFile" accept="audio/*"></label><button class="outline" id="demoBtn">Try demo pattern</button></div>
+  <div class="track" id="trackName">No track loaded · Upload an audio file to begin</div></div>
+  <div class="hero-art"><div class="orb"></div><div class="wave wave-a"></div><div class="wave wave-b"></div><div class="wave wave-c"></div><div class="art-label">SOUND <span>→</span> WATER</div></div>
+</section>
+<section class="dashboard">
+ <div class="section-head"><div><div class="eyebrow">LIVE PERFORMANCE</div><h2>Fountain console</h2></div><div class="mode-switch"><button class="mode active" data-mode="auto">♫ Music reactive</button><button class="mode" data-mode="manual">☷ Manual control</button></div></div>
+ <div class="panel player-panel">
+  <div class="player-left"><button class="play-button" id="playBtn" disabled>▶</button><div class="player-meta"><strong id="playState">Ready to play</strong><span id="timeText">00:00 / 00:00</span></div></div>
+  <canvas id="visualizer" width="900" height="110"></canvas>
+  <div class="player-right"><label class="volume">VOL <input type="range" id="volume" min="0" max="100" value="75"></label><button class="icon-btn" id="stopAudio" title="Stop music">■</button></div>
+  <audio id="audio" crossorigin="anonymous"></audio>
+ </div>
+ <div class="jets-head"><div><h3>Jet array <span class="count">08 CHANNELS</span></h3><p>Live output level · 0–100%</p></div><div class="jet-actions"><button class="outline small" id="allOff">All jets off</button><button class="outline small" id="testBtn">Test sequence</button></div></div>
+ <div class="jet-grid" id="jetGrid"></div>
+ <div class="bottom-grid">
+  <div class="panel settings-panel"><div class="panel-title"><div><h3>ESP32 connection</h3><p>Connect your controller on the same Wi-Fi network</p></div><span class="chip">WEBSOCKET</span></div>
+   <label class="field-label" for="espIp">ESP32 IP address</label><div class="connect-row"><input id="espIp" value="192.168.4.1" placeholder="192.168.1.50"><button class="primary" id="connectBtn2">Connect</button></div>
+   <div class="hint">Default WebSocket port: <b>81</b> · Example: ws://192.168.1.50:81</div>
+   <div class="connection-foot"><span id="lastSent">Waiting for connection</span><span id="sendRate">—</span></div>
+  </div>
+  <div class="panel safety-panel"><div class="panel-title"><div><h3>System status</h3><p>Prototype monitoring</p></div><span class="chip green">LOCAL CONTROL</span></div>
+   <div class="status-line"><span>Operating mode</span><b id="modeLabel">Music reactive</b></div><div class="status-line"><span>Active jets</span><b id="activeJets">0 / 8</b></div><div class="status-line"><span>Output update</span><b>20 Hz target</b></div>
+   <button class="stop-button" id="emergencyBtn">■ &nbsp; STOP ALL OUTPUTS</button>
+  </div>
+ </div>
+ <footer><span> A Q U A P U L S E <span class="muted">· Prototype controller</span></span><span>Keep this page open while the fountain is running.</span></footer>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body></html>
